@@ -1,0 +1,16 @@
+aliases: []
+creation_timestamp: 1727767524548
+current_stage: None
+description: 'Model Validation Status: SUCCESS
+
+  Validation Details: [Run](#mlflow/experiments/832108882233838028/runs/cebe72627b6243cd8a576bfeb1771827)'
+last_updated_timestamp: 1727767524642
+name: aiml_tti_dev.tti_models.xjors2601_KernelRegression
+run_id: cebe72627b6243cd8a576bfeb1771827
+run_link: null
+source: file:///home/josch/dsbai/trafficinformation-traindelaypredictions-ai-modelfactory/pipeline_kernel_regression/mlruns/832108882233838028/cebe72627b6243cd8a576bfeb1771827/artifacts/KernelRegression
+status: READY
+status_message: null
+storage_location: mlruns/832108882233838028/cebe72627b6243cd8a576bfeb1771827/artifacts/KernelRegression
+user_id: null
+version: 1

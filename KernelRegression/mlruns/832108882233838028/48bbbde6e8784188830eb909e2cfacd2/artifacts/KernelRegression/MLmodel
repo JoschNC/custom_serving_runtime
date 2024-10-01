@@ -1,0 +1,21 @@
+artifact_path: KernelRegression
+flavors:
+  python_function:
+    cloudpickle_version: 3.0.0
+    code: code
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.11.2
+    streamable: false
+mlflow_version: 2.13.2
+model_size_bytes: 19672121
+model_uuid: 32736d648d4b4edb8e43fb0e62adcfe7
+run_id: 48bbbde6e8784188830eb909e2cfacd2
+signature:
+  inputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int32", "shape": [-1]}}]'
+  outputs: '[{"type": "double", "required": true}]'
+  params: null
+utc_time_created: '2024-10-01 07:27:52.831688'

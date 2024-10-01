@@ -1,0 +1,15 @@
+artifact_uri: file:///home/josch/dsbai/trafficinformation-traindelaypredictions-ai-modelfactory/pipeline_kernel_regression/mlruns/832108882233838028/cebe72627b6243cd8a576bfeb1771827/artifacts
+end_time: 1727767524701
+entry_point_name: ''
+experiment_id: '832108882233838028'
+lifecycle_stage: active
+run_id: cebe72627b6243cd8a576bfeb1771827
+run_name: dapper-foal-594
+run_uuid: cebe72627b6243cd8a576bfeb1771827
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1727767521707
+status: 3
+tags: []
+user_id: josch

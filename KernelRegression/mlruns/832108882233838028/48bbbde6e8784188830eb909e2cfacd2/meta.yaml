@@ -1,0 +1,15 @@
+artifact_uri: file:///home/josch/dsbai/trafficinformation-traindelaypredictions-ai-modelfactory/pipeline_kernel_regression/mlruns/832108882233838028/48bbbde6e8784188830eb909e2cfacd2/artifacts
+end_time: 1727767675819
+entry_point_name: ''
+experiment_id: '832108882233838028'
+lifecycle_stage: active
+run_id: 48bbbde6e8784188830eb909e2cfacd2
+run_name: handsome-hare-468
+run_uuid: 48bbbde6e8784188830eb909e2cfacd2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1727767672820
+status: 3
+tags: []
+user_id: josch
