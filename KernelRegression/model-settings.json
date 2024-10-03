@@ -1,6 +1,6 @@
 {
     "name": "KernelRegression",
-    "implementation": "mlserver_mlflow.MLflowRuntime",
+    "implementation": "models.CustomMLflowModel",
     "parameters": {
         "uri": "models:/aiml_tti_dev.tti_models.xjors2601_KernelRegression/1",
         "version": "1"

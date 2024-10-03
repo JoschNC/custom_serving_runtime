@@ -16,8 +16,8 @@ inference_request = types.InferenceRequest(
     inputs=[
         types.RequestInput(
             name="a_name",
-            shape=[len(input_array)],
-            datatype="FP32",
+            shape=[-1],
+            datatype="INT32",
             data=input_array
         )
     ]

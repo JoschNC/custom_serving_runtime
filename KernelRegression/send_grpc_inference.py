@@ -11,22 +11,21 @@ pp = PrettyPrinter(indent=1)
 
 model_name = "KernelRegression"
 model_version = "1"
-input_data= [1, 2, 3, 4]
+input_data= [1, 2, 3]
 route_string = "OL-TAN,OL-TAF,HZ-TAN,HZ-TAF,TH-TAN,TH-TAF"
 
 inference_request = types.InferenceRequest(
     model_name = model_name,
     model_version = model_version,
     parameters = {
-        "superroute":{
-            route_string
-        }
+        "superroute": route_string,
+        "content_type":"np"
     },
     inputs=[
         types.RequestInput(
             name="delays",
-            shape=[1,1],
-            datatype="FP32",
+            shape=[-1],
+            datatype="INT32",
             data=input_data
         )
     ]

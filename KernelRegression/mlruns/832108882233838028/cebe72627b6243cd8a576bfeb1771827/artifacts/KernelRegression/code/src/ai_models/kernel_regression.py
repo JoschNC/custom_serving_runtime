@@ -1,4 +1,5 @@
 # Imports
+from typing import List
 from numpy import asarray, array, median
 from pandas import Series
 from sklearn.preprocessing import normalize
@@ -101,7 +102,7 @@ class KernelRegression(AbstractModel):
         
         return target[-1] + weight / norm
 
-    def predict(self, context = None, target: array = array([])) -> list:
+    def predict(self, context = None, target: array = array([])) -> List[float]:
         """
         Predict future values for target until reference length.
         Method must have 'context' input variable to be compatible with MLflow, even if unused.
