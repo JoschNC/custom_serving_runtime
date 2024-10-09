@@ -1,5 +1,6 @@
 # Imports
-from numpy import asarray, array, median
+from numpy import asarray, array, median, nan
+import numpy as np
 from pandas import Series
 from sklearn.preprocessing import normalize
 import time
@@ -111,14 +112,25 @@ class KernelRegression(AbstractModel):
         if len(target) > 0 and isnan(target[-1]):
             raise ValueError("Train delay at current station cannot be NaN")
         if len(target) < 1:
-            return self.empty_data_prediction
+            # JOHANNES DEBUGGING CODE
+            test_list = self.empty_data_prediction
+            test_list[0] = None
+            empty_predictions_array = array([x if x is not None else float('-inf') for x in test_list])
+            empty_predictions_dict = {"predictions": empty_predictions_array}
+            return empty_predictions_dict
         else:
             forecast = (len(target) - 1) * [None] + [target[-1]]
         for i in range(len(target) - 1, self.ref.shape[1] - 1):
             forecast.append(self.predict_at(target, i))
             if self.recursive and len(target) > self.recursive_switch:
                 target.append(forecast[-1])
-        return forecast
+
+        # JOHANNES DEBUGGING CODE
+        forecast_test = forecast
+        forecast_test[0] = None
+        forecast_array = array([x if x is not None else float('-inf') for x in forecast_test])
+        forecast_dict = {"predictions": forecast_array}
+        return forecast_dict
 
     def set_inference_time(self, inference_time):
         self.inference_time = inference_time

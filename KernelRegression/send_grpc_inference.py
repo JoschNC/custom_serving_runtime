@@ -17,6 +17,7 @@ route_string = "OL-TAN,OL-TAF,HZ-TAN,HZ-TAF,TH-TAN,TH-TAF"
 inference_request = types.InferenceRequest(
     model_name = model_name,
     model_version = model_version,
+    id = "an_inference_id",
     parameters = {
         "superroute": route_string,
         "content_type":"np"

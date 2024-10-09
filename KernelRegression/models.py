@@ -1,4 +1,4 @@
-import mlserver
+import mlserver_mlflow
 from mlserver import MLModel
 from mlserver.utils import get_model_uri
 from mlserver.types import InferenceRequest, InferenceResponse, ResponseOutput
@@ -16,46 +16,36 @@ class CustomMLflowModel(MLModel):
         self._ready = True
         return self._ready
 
-
     async def predict(self, payload: InferenceRequest) -> InferenceResponse:
 
-        print("Payload:")
-        print(payload)
-        print()
         # Unpack InferenceRequest
         payload_input = payload.inputs[0]
 
-        print("Payload_input")
-        print(payload_input)
-        print()
+        # Get Requets ID
+        request_id = payload.id
 
         # Unpack RequestInput
         data = payload_input.data
 
-        print_variable(data, "data")
-
         # Unpack array
         array = data.root
    
+        # Convert array to numpy so the model can take it as input
         np_arr = np.array(array, dtype=np.int32)
 
-        print(np_arr)
-
+        # Create predictions
         model_output = self.model.predict(np_arr)
 
-        # Changing None values to NaN
+        # Changing None values to NaN (gRPC can't send None values mixed with floats in the same array.)
         model_output = np.array([np.nan if x is None else x for x in model_output], dtype= np.float64)
-
-        print_variable(model_output, "model_output")
         
+        # Format response output
         response_output = ResponseOutput(name="response",
                                          shape = [1,len(model_output)],
                                          datatype="FP64",
                                          data = model_output)
-        print("Response output:")
-        print(response_output)
-        print()
-        inference_response = InferenceResponse(model_name="test", outputs = [response_output])
+
+        inference_response = InferenceResponse(model_name="test", id=request_id, outputs = [response_output])
 
         return inference_response
 
