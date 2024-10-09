@@ -102,34 +102,36 @@ class KernelRegression(AbstractModel):
         
         return target[-1] + weight / norm
 
-    def predict(self, context = None, target: array = array([])) -> list:
+    def predict(self, context = None, model_input = array([])):
         """
         Predict future values for target until reference length.
         Method must have 'context' input variable to be compatible with MLflow, even if unused.
         """
-        target = target.tolist()
+        model_input = model_input.tolist()
 
-        if len(target) > 0 and isnan(target[-1]):
+        if len(model_input) > 0 and isnan(model_input[-1]):
             raise ValueError("Train delay at current station cannot be NaN")
-        if len(target) < 1:
+        if len(model_input) < 1:
             # JOHANNES DEBUGGING CODE
             test_list = self.empty_data_prediction
             test_list[0] = None
-            empty_predictions_array = array([x if x is not None else float('-inf') for x in test_list])
-            empty_predictions_dict = {"predictions": empty_predictions_array}
+            empty_predictions_array = array([x if x is not None else float('inf') for x in test_list])
+            boolean_array = array([True if x is not None else False for x in test_list])
+            empty_predictions_dict = {"predictions": empty_predictions_array, "model_predictions": boolean_array}
             return empty_predictions_dict
         else:
-            forecast = (len(target) - 1) * [None] + [target[-1]]
-        for i in range(len(target) - 1, self.ref.shape[1] - 1):
-            forecast.append(self.predict_at(target, i))
-            if self.recursive and len(target) > self.recursive_switch:
-                target.append(forecast[-1])
+            forecast = (len(model_input) - 1) * [None] + [model_input[-1]]
+        for i in range(len(model_input) - 1, self.ref.shape[1] - 1):
+            forecast.append(self.predict_at(model_input, i))
+            if self.recursive and len(model_input) > self.recursive_switch:
+                model_input.append(forecast[-1])
 
         # JOHANNES DEBUGGING CODE
         forecast_test = forecast
         forecast_test[0] = None
         forecast_array = array([x if x is not None else float('-inf') for x in forecast_test])
-        forecast_dict = {"predictions": forecast_array}
+        boolean_array = array([True if x is not None else False for x in forecast_test])
+        forecast_dict = {"predictions": forecast_array, "model_predictions": boolean_array}
         return forecast_dict
 
     def set_inference_time(self, inference_time):
